@@ -9,6 +9,8 @@ from aiogram.dispatcher import FSMContext
 from keyboards import get_keyboard
 from unifer import all_program_func
 
+# from memory_profiler import memory_usage
+
 storage = MemoryStorage()
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot=bot, storage=storage)
@@ -99,6 +101,9 @@ async def load_image(message: types.Message, state: FSMContext):
         create_txt_doc(result['data'])
         await message.answer('Готово! Лови документ с ссылками:')
         await message.answer_document(InputFile('links.txt'))
+
+        # print(f'Затрачено {memory_usage()} памяти')    # ТЕСТ: КОЛИЧЕСТВО ОПЕРАТИВНОЙ ПАМЯТИ
+
         await state.finish()
 
 
